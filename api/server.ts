@@ -13,7 +13,29 @@ const handler = createMcpHandler((server) => {
       };
     },
   );
+  server.tool(
+    "get_weather",
+    "Get the current weather at a location",
+    {
+      latitude: z.number(),
+      longitude: z.number(),
+      city: z.string(),
+    },
+    async ({ latitude, longitude, city }) => {
+      const response = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weathercode,relativehumidity_2m&timezone=auto`,
+      );
+      const weatherData = await response.json();
+      return {
+        content: [
+          {
+            type: "text",
+            text: `🌤️ Weather in ${city}: ${weatherData.current.temperature_2m}°C, Humidity: ${weatherData.current.relativehumidity_2m}%`,
+          },
+        ],
+      };
+    },
+  );
 });
 
 export { handler as GET, handler as POST, handler as DELETE };
-
