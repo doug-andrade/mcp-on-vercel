@@ -2,6 +2,7 @@ import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
 
 const handler = createMcpHandler((server) => {
+
   server.tool(
     "roll_dice",
     "Rolls an N-sided die",

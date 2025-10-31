@@ -31,6 +31,7 @@ These tools demonstrate basic functionality and API integration patterns. Replac
 
 ## Local dev
 
+- Install dependencies with `bun install`
 - Run `vercel dev` for local development
 - Alternatively, integrate the system into the server framework of your choice.
 
